@@ -2,10 +2,12 @@ import { useState, useCallback } from 'react'
 import heroImg from '../public/images/hero-new.webp'
 import flatlayImg from '../public/images/chilgoza-flatlay.png'
 import lifestyleImg from '../public/images/chilgoza-lifestyle.png'
+import productClassicImg from '../public/images/product-classic.webp'
+import productTinImg from '../public/images/product-tin.webp'
 
 const PRODUCTS = [
-  { name: 'Classic Chilgoza', detail: 'Shell-on pine nuts', size: '250g', price: 22, img: flatlayImg, position: 'center', badge: 'House favourite' },
-  { name: 'The Sharing Tin',  detail: 'Shell-on pine nuts', size: '500g', price: 38, img: heroImg,    position: 'center 58%' },
+  { name: 'Classic Chilgoza', detail: 'Shell-on pine nuts', size: '250g', price: 22, img: productClassicImg, position: 'center 30%', badge: 'House favourite' },
+  { name: 'The Sharing Tin',  detail: 'Shell-on pine nuts', size: '500g', price: 38, img: productTinImg,     position: 'center 40%' },
   { name: 'Al Janat Gift Box', detail: 'A considered presentation', size: '750g', price: 58, img: lifestyleImg, position: 'center' },
 ]
 
