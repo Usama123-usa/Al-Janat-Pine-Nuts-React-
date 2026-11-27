@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react'
 import heroImg from '../public/images/hero-new.webp'
-import flatlayImg from '../public/images/chilgoza-flatlay.png'
-import lifestyleImg from '../public/images/chilgoza-lifestyle.png'
+import storyImg from '../public/images/story-section.webp'
+import editorialImg from '../public/images/editorial-section.webp'
 import bag1kgImg from '../public/images/bag-1kg.webp'
 import bag500gImg from '../public/images/bag-500g.webp'
 import giftBoxImg from '../public/images/gift-box.webp'
@@ -220,7 +220,7 @@ export default function App() {
 
         <section id="story" className="story">
           <div className="story-image">
-            <img src={lifestyleImg} alt="Chilgoza pine nuts in a stoneware bowl" />
+            <img src={storyImg} alt="Chilgoza pine nuts in a stoneware bowl" />
             <span className="image-caption">A harvest shaped by altitude and time</span>
           </div>
           <div className="story-copy">
@@ -265,7 +265,7 @@ export default function App() {
             <a href="#shop" className="button button-dark">Shop the collection <span>&#x2197;</span></a>
           </div>
           <div className="editorial-image">
-            <img src={flatlayImg} alt="Pine nuts, kernels, pine branches on stone" />
+            <img src={editorialImg} alt="Pine nuts, kernels, pine branches on stone" />
           </div>
         </section>
 
