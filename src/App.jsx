@@ -259,10 +259,145 @@ function CartDrawer({ cart, onClose, onRemove }) {
   )
 }
 
+const POLICIES = {
+  shipping: {
+    title: 'Shipping & Delivery',
+    icon: '🚚',
+    sections: [
+      {
+        heading: 'Delivery Timeframes',
+        items: [
+          { label: 'Karachi, Lahore, Islamabad', value: '2–3 Business Days' },
+          { label: 'Other Major Cities', value: '3–5 Business Days' },
+          { label: 'Remote Areas', value: '5–7 Business Days' },
+        ],
+      },
+      {
+        heading: 'Shipping Charges',
+        items: [
+          { label: 'Orders above PKR 5,000', value: 'Free Delivery' },
+          { label: 'Orders below PKR 5,000', value: 'PKR 200 flat rate' },
+          { label: 'Same-day delivery (Karachi)', value: 'PKR 350 (order before 12pm)' },
+        ],
+      },
+      {
+        heading: 'Important Notes',
+        bullets: [
+          'All orders are carefully packed to protect the product during transit.',
+          'You will receive an SMS / WhatsApp notification with your tracking number once your order is dispatched.',
+          'Al Janat Pine Nuts ships nationwide across Pakistan via trusted courier partners.',
+          'Orders placed on weekends or public holidays are processed the next business day.',
+          'During peak seasons (Eid, Ramadan), delivery may take 1–2 additional days.',
+        ],
+      },
+    ],
+  },
+  returns: {
+    title: 'Returns & Refunds',
+    icon: '↩️',
+    sections: [
+      {
+        heading: 'Our Guarantee',
+        para: 'At Al Janat, we stand behind the quality of every product we send. If you are not completely satisfied with your order, we are here to make it right.',
+      },
+      {
+        heading: 'Return Eligibility',
+        bullets: [
+          'Returns are accepted within 7 days of delivery.',
+          'The product must be unopened and in its original packaging.',
+          'Items damaged during transit are eligible for a full replacement or refund.',
+          'Sale or discounted items are not eligible for return unless damaged or defective.',
+        ],
+      },
+      {
+        heading: 'How to Request a Return',
+        steps: [
+          'Contact us at hello@aljanat.com or WhatsApp within 7 days of receiving your order.',
+          'Share your order number and a photo of the item if damaged.',
+          'Our team will review your request within 24 business hours.',
+          'Once approved, we will arrange a free pick-up or guide you on how to send the item back.',
+        ],
+      },
+      {
+        heading: 'Refund Process',
+        items: [
+          { label: 'Refund Method', value: 'Original payment method or bank transfer' },
+          { label: 'Processing Time', value: '5–7 Business Days after return received' },
+          { label: 'Replacement', value: 'Dispatched within 2 business days of approval' },
+        ],
+      },
+      {
+        heading: 'Non-Returnable Items',
+        bullets: [
+          'Opened or partially consumed products.',
+          'Products not in their original packaging.',
+          'Gift boxes where the outer packaging has been removed.',
+        ],
+      },
+    ],
+  },
+}
+
+function PolicyModal({ type, onClose }) {
+  const policy = POLICIES[type]
+  if (!policy) return null
+  return (
+    <>
+      <div className="modal-overlay" onClick={onClose} />
+      <div className="policy-modal-wrap">
+        <div className="policy-modal" role="dialog" aria-modal="true">
+          <div className="policy-header">
+            <div>
+              <p className="eyebrow light">Al Janat Pine Nuts</p>
+              <h2>{policy.title}</h2>
+            </div>
+            <button className="policy-close" onClick={onClose} aria-label="Close">&#215;</button>
+          </div>
+          <div className="policy-body">
+            {policy.sections.map((s, i) => (
+              <div key={i} className="policy-section">
+                <h3>{s.heading}</h3>
+                {s.para && <p>{s.para}</p>}
+                {s.items && (
+                  <table className="policy-table">
+                    <tbody>
+                      {s.items.map((it, j) => (
+                        <tr key={j}>
+                          <td>{it.label}</td>
+                          <td><strong>{it.value}</strong></td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                )}
+                {s.bullets && (
+                  <ul className="policy-list">
+                    {s.bullets.map((b, j) => <li key={j}>{b}</li>)}
+                  </ul>
+                )}
+                {s.steps && (
+                  <ol className="policy-list policy-steps">
+                    {s.steps.map((b, j) => <li key={j}>{b}</li>)}
+                  </ol>
+                )}
+              </div>
+            ))}
+            <div className="policy-contact">
+              <p>Questions? We&#8217;re here to help.</p>
+              <a href="mailto:hello@aljanat.com" className="button button-dark">Contact Us <span>&#x2192;</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  )
+}
+
 export default function App() {
   const [cart, setCart] = useState([])
   const [cartOpen, setCartOpen] = useState(false)
   const [modalIdx, setModalIdx] = useState(null)
+  const [policyPage, setPolicyPage] = useState(null)
 
   const addToCart = useCallback((idx) => {
     const p = PRODUCTS[idx]
@@ -388,8 +523,7 @@ export default function App() {
             <p>Premium Chilgoza, thoughtfully presented for modern tables.</p>
           </div>
           <div className="footer-links"><h3>Explore</h3><a href="#shop">Shop all</a><a href="#story">Our story</a><a href="#quality">Our standard</a><a href="#faq">FAQs</a></div>
-          <div className="footer-links"><h3>Help</h3><a href="mailto:hello@aljanat.com">hello@aljanat.com</a><a href="#faq">Shipping &amp; delivery</a><a href="#faq">Returns</a><a href="#faq">Care guide</a></div>
-          <div className="footer-links"><h3>Follow</h3><a href="#top">Instagram</a><a href="#top">Pinterest</a><a href="#top">Facebook</a></div>
+          <div className="footer-links"><h3>Help</h3><a href="mailto:hello@aljanat.com">hello@aljanat.com</a><a href="#shipping" onClick={e=>{e.preventDefault();setPolicyPage('shipping')}}>Shipping &amp; Delivery</a><a href="#returns" onClick={e=>{e.preventDefault();setPolicyPage('returns')}}>Returns &amp; Refunds</a><a href="#faq">Care Guide</a></div>
         </div>
         <div className="footer-bottom">
           <span>© 2026 Al Janat Pine Nuts</span>
@@ -399,6 +533,7 @@ export default function App() {
 
       {cartOpen && <CartDrawer cart={cart} onClose={() => setCartOpen(false)} onRemove={removeFromCart} />}
       {modalIdx !== null && <ProductModal product={PRODUCTS[modalIdx]} index={modalIdx} onAdd={addToCart} onClose={() => setModalIdx(null)} />}
+      {policyPage && <PolicyModal type={policyPage} onClose={() => setPolicyPage(null)} />}
     </div>
   )
 }
