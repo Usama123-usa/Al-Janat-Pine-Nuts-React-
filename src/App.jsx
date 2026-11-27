@@ -2,13 +2,14 @@ import { useState, useCallback } from 'react'
 import heroImg from '../public/images/hero-new.webp'
 import flatlayImg from '../public/images/chilgoza-flatlay.png'
 import lifestyleImg from '../public/images/chilgoza-lifestyle.png'
-import productClassicImg from '../public/images/product-classic.webp'
-import productTinImg from '../public/images/product-tin.webp'
+import bag1kgImg from '../public/images/bag-1kg.webp'
+import bag500gImg from '../public/images/bag-500g.webp'
+import nutsBowlImg from '../public/images/nuts-bowl.webp'
 
 const PRODUCTS = [
-  { name: 'Classic Chilgoza', detail: 'Shell-on pine nuts', size: '250g', price: 22, img: productClassicImg, position: 'center 30%', badge: 'House favourite' },
-  { name: 'The Sharing Tin',  detail: 'Shell-on pine nuts', size: '500g', price: 38, img: productTinImg,     position: 'center 40%' },
-  { name: 'Al Janat Gift Box', detail: 'A considered presentation', size: '750g', price: 58, img: lifestyleImg, position: 'center' },
+  { name: 'Classic Chilgoza', detail: 'Shell-on pine nuts', size: '250g', price: 22, img: bag1kgImg,   position: 'center 20%', badge: 'House favourite' },
+  { name: 'The Sharing Tin',  detail: 'Shell-on pine nuts', size: '500g', price: 38, img: bag500gImg,  position: 'center 20%' },
+  { name: 'Al Janat Gift Box', detail: 'A considered presentation', size: '750g', price: 58, img: nutsBowlImg, position: 'center' },
 ]
 
 function BrandMark({ className = '' }) {
