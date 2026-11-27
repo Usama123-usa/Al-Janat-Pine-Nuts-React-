@@ -30,8 +30,30 @@ h1, h2, h3, h4 { margin: 0; }
 .site-shell { overflow: hidden; min-width: 320px; background: var(--ivory); }
 
 /* Announcement */
-.announcement { height: 31px; display: grid; place-items: center; background: var(--cream); color: var(--forest); }
-.announcement p { margin: 0; font-size: 9px; letter-spacing: .2em; text-transform: uppercase; }
+.announcement {
+  height: 34px;
+  overflow: hidden;
+  background: var(--forest);
+  color: var(--ivory);
+  display: flex;
+  align-items: center;
+}
+.announcement-track {
+  display: flex;
+  white-space: nowrap;
+  animation: marquee 22s linear infinite;
+}
+.announcement-track span {
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+.announcement-track span strong { color: var(--gold); font-weight: 700; }
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
 
 /* Header */
 .site-header {

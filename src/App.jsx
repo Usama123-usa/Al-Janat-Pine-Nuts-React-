@@ -423,7 +423,12 @@ export default function App() {
 
   return (
     <div className="site-shell">
-      <div className="announcement"><p>Thoughtfully selected Chilgoza · Packed with care</p></div>
+      <div className="announcement">
+        <div className="announcement-track">
+          <span>Thoughtfully selected Chilgoza · Packed with care &nbsp;|&nbsp; 25% off and Free delivery on orders above PKR 10,000 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+          <span>Thoughtfully selected Chilgoza · Packed with care &nbsp;|&nbsp; 25% off and Free delivery on orders above PKR 10,000 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        </div>
+      </div>
       <Header cartCount={cartCount} onCartOpen={() => setCartOpen(true)} />
       <main>
         <Hero />
