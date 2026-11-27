@@ -187,115 +187,6 @@ const WA_ICON = (
   </svg>
 )
 
-function OrderModal({ product, onClose }) {
-  const [form, setForm] = useState({ name: '', phone: '', address: '' })
-  const [qty, setQty] = useState(1)
-  const [payment, setPayment] = useState('cod')
-  if (!product) return null
-
-  const total = product.price * qty
-
-  function handleSubmit(e) {
-    e.preventDefault()
-    const payLabel = payment === 'cod' ? 'Cash on Delivery' : 'Online Payment (Bank Transfer)'
-    const msg = encodeURIComponent(
-      `🛒 *New Order — Al Janat Pine Nuts*\n\n` +
-      `📦 *Product:* ${product.name} (${product.size})\n` +
-      `🔢 *Quantity:* ${qty}\n` +
-      `💰 *Total:* PKR ${total.toLocaleString()}\n` +
-      `💳 *Payment:* ${payLabel}\n\n` +
-      `👤 *Customer Details:*\n` +
-      `Name: ${form.name}\n` +
-      `Phone: ${form.phone}\n` +
-      `Address: ${form.address}\n\n` +
-      `Please confirm my order. JazakAllah!`
-    )
-    window.open(`https://wa.me/${WA_NUMBER}?text=${msg}`, '_blank', 'noopener,noreferrer')
-    onClose()
-  }
-
-  return (
-    <>
-      <div className="modal-overlay" onClick={onClose} />
-      <div className="order-modal" role="dialog" aria-modal="true">
-        <button className="modal-close" onClick={onClose} aria-label="Close">&#215;</button>
-
-        <div className="order-modal-head">
-          <img src={product.img} alt={product.name} />
-          <div>
-            <h3>{product.name}</h3>
-            <p>{product.detail} · {product.size}</p>
-            <div className="modal-price-block" style={{marginTop: 6}}>
-              <span className="modal-price-original">PKR {product.originalPrice.toLocaleString()}</span>
-              <span className="modal-price-off">25% OFF</span>
-              <p className="modal-price">PKR {product.price.toLocaleString()}</p>
-            </div>
-          </div>
-        </div>
-
-        <form className="order-form" onSubmit={handleSubmit}>
-
-          {/* Quantity */}
-          <div className="order-qty-row">
-            <label>Quantity</label>
-            <div className="qty-ctrl">
-              <button type="button" onClick={() => setQty(q => Math.max(1, q - 1))}>−</button>
-              <span>{qty}</span>
-              <button type="button" onClick={() => setQty(q => q + 1)}>+</button>
-            </div>
-            <span className="order-total">Total: <strong>PKR {total.toLocaleString()}</strong></span>
-          </div>
-
-          {/* Customer Info */}
-          <label>Full Name <span>*</span></label>
-          <input required placeholder="e.g. Ali Hassan" value={form.name} onChange={e => setForm(f => ({...f, name: e.target.value}))} />
-
-          <label>Phone Number <span>*</span></label>
-          <input required type="tel" placeholder="e.g. 0300 1234567" value={form.phone} onChange={e => setForm(f => ({...f, phone: e.target.value}))} />
-
-          <label>Delivery Address <span>*</span></label>
-          <textarea required rows={2} placeholder="House no., Street, Area, City" value={form.address} onChange={e => setForm(f => ({...f, address: e.target.value}))} />
-
-          {/* Payment Method */}
-          <label style={{marginTop: 14}}>Payment Method <span>*</span></label>
-          <div className="payment-options">
-            <label className={`pay-option${payment === 'cod' ? ' selected' : ''}`} onClick={() => setPayment('cod')}>
-              <input type="radio" name="payment" value="cod" checked={payment === 'cod'} onChange={() => setPayment('cod')} />
-              <div className="pay-icon">💵</div>
-              <div>
-                <strong>Cash on Delivery</strong>
-                <span>Pay when your order arrives</span>
-              </div>
-              {payment === 'cod' && <span className="pay-check">✓</span>}
-            </label>
-            <label className={`pay-option${payment === 'online' ? ' selected' : ''}`} onClick={() => setPayment('online')}>
-              <input type="radio" name="payment" value="online" checked={payment === 'online'} onChange={() => setPayment('online')} />
-              <div className="pay-icon">🏦</div>
-              <div>
-                <strong>Online Payment</strong>
-                <span>Bank transfer / EasyPaisa / JazzCash</span>
-              </div>
-              {payment === 'online' && <span className="pay-check">✓</span>}
-            </label>
-          </div>
-
-          {payment === 'online' && (
-            <div className="online-pay-note">
-              <p>After placing your order, our team will share bank account details via WhatsApp for payment confirmation.</p>
-            </div>
-          )}
-
-          <button type="submit" className="button button-dark order-submit">
-            {WA_ICON}
-            Confirm Order on WhatsApp
-          </button>
-          <p className="order-disclaimer">By placing this order you agree to be contacted on WhatsApp for confirmation.</p>
-        </form>
-      </div>
-    </>
-  )
-}
-
 function FaqItem({ num, question, answer, defaultOpen = false }) {
   const [open, setOpen] = useState(defaultOpen)
   return (
@@ -341,52 +232,178 @@ function buildWhatsAppMsg(cart) {
   )
 }
 
-function CartDrawer({ cart, onClose, onRemove }) {
+const COD_ICON = (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" width="22" height="22" aria-hidden="true">
+    <rect x="2" y="6" width="20" height="12" rx="2"/>
+    <circle cx="12" cy="12" r="3"/>
+    <path d="M6 12h.01M18 12h.01"/>
+  </svg>
+)
+
+const BANK_ICON = (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" width="22" height="22" aria-hidden="true">
+    <path d="M3 10h18M3 14h18M5 6l7-3 7 3M5 18v-8M19 18v-8M3 18h18"/>
+  </svg>
+)
+
+const CHECK_ICON = (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" width="14" height="14" aria-hidden="true">
+    <path d="M20 6L9 17l-5-5"/>
+  </svg>
+)
+
+function CartDrawer({ cart, onClose, onRemove, selectedProduct, onOrderClose }) {
+  const [form, setForm] = useState({ name: '', phone: '', address: '' })
+  const [qty, setQty] = useState(1)
+  const [payment, setPayment] = useState('cod')
+
   const total = cart.reduce((a, i) => a + i.price * i.qty, 0)
   const count = cart.reduce((a, i) => a + i.qty, 0)
+
+  const orderTotal = selectedProduct ? selectedProduct.price * qty : 0
+
+  function handleOrderSubmit(e) {
+    e.preventDefault()
+    const p = selectedProduct
+    const payLabel = payment === 'cod' ? 'Cash on Delivery' : 'Online Payment (Bank Transfer)'
+    const msg = encodeURIComponent(
+      `🛒 *New Order — Al Janat Pine Nuts*\n\n` +
+      `📦 *Product:* ${p.name} (${p.size})\n` +
+      `🔢 *Quantity:* ${qty}\n` +
+      `💰 *Total:* PKR ${orderTotal.toLocaleString()}\n` +
+      `💳 *Payment:* ${payLabel}\n\n` +
+      `👤 *Customer Details:*\n` +
+      `Name: ${form.name}\n` +
+      `Phone: ${form.phone}\n` +
+      `Address: ${form.address}\n\n` +
+      `Please confirm my order. JazakAllah!`
+    )
+    window.open(`https://wa.me/${WA_NUMBER}?text=${msg}`, '_blank', 'noopener,noreferrer')
+    onOrderClose()
+    onClose()
+  }
+
   return (
     <>
-      <div className="cart-overlay visible" onClick={onClose} />
+      <div className="cart-overlay visible" onClick={selectedProduct ? onOrderClose : onClose} />
       <aside className="cart-drawer open" aria-label="Shopping bag">
         <div className="cart-head">
-          <p>Your bag <span>({count})</span></p>
+          {selectedProduct
+            ? <><button className="cart-back-btn" onClick={onOrderClose} aria-label="Back">&#8592;</button><p>Place Your Order</p></>
+            : <p>Your bag <span>({count})</span></p>
+          }
           <button onClick={onClose} aria-label="Close bag">&#215;</button>
         </div>
-        <div className="cart-items">
-          {cart.length === 0
-            ? <div className="empty-cart">
-                <BrandMark />
-                <h3>Your bag is empty</h3>
-                <p>Add something thoughtful from our collection.</p>
-                <a className="button button-dark" href="#shop" onClick={onClose}>Shop the collection</a>
-              </div>
-            : cart.map((item, i) => (
-                <div className="cart-item" key={i}>
-                  <img src={item.img} alt={item.name} />
-                  <div>
-                    <h3>{item.name}</h3>
-                    <p>{item.detail} · {item.size}</p>
-                    <strong>PKR {item.price.toLocaleString()}</strong>
-                  </div>
-                  <button className="remove-btn" onClick={() => onRemove(i)} aria-label="Remove">&#215;</button>
+
+        {selectedProduct ? (
+          <div className="cart-order-form">
+            <div className="cart-order-product">
+              <img src={selectedProduct.img} alt={selectedProduct.name} />
+              <div>
+                <h3>{selectedProduct.name}</h3>
+                <p>{selectedProduct.detail} · {selectedProduct.size}</p>
+                <div style={{display:'flex', alignItems:'center', gap:8, marginTop:4}}>
+                  <span style={{textDecoration:'line-through', color:'var(--text-muted)', fontSize:'0.8rem'}}>PKR {selectedProduct.originalPrice.toLocaleString()}</span>
+                  <span style={{background:'var(--gold)', color:'#fff', fontSize:'0.65rem', fontWeight:700, padding:'2px 6px', borderRadius:3}}>25% OFF</span>
                 </div>
-              ))
-          }
-        </div>
-        {cart.length > 0 && (
-          <div className="cart-foot">
-            <div><span>Subtotal</span><strong>PKR {total.toLocaleString()}</strong></div>
-            <a
-              className="button button-dark wa-checkout"
-              href={`https://wa.me/${WA_NUMBER}?text=${buildWhatsAppMsg(cart)}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <svg viewBox="0 0 24 24" fill="currentColor" width="17" height="17" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.533 5.857L.057 23.882a.5.5 0 0 0 .613.613l6.056-1.481A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.797 9.797 0 0 1-5.001-1.372l-.359-.214-3.724.91.937-3.619-.234-.372A9.797 9.797 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
-              Order on WhatsApp
-            </a>
-            <small>We'll confirm your order via WhatsApp</small>
+                <strong style={{color:'var(--forest)'}}>PKR {selectedProduct.price.toLocaleString()}</strong>
+              </div>
+            </div>
+
+            <form className="order-form" onSubmit={handleOrderSubmit}>
+              <div className="order-qty-row">
+                <label>Quantity</label>
+                <div className="qty-ctrl">
+                  <button type="button" onClick={() => setQty(q => Math.max(1, q - 1))}>−</button>
+                  <span>{qty}</span>
+                  <button type="button" onClick={() => setQty(q => q + 1)}>+</button>
+                </div>
+                <span className="order-total">Total: <strong>PKR {orderTotal.toLocaleString()}</strong></span>
+              </div>
+
+              <label>Full Name <span>*</span></label>
+              <input required placeholder="e.g. Ali Hassan" value={form.name} onChange={e => setForm(f => ({...f, name: e.target.value}))} />
+
+              <label>Phone Number <span>*</span></label>
+              <input required type="tel" placeholder="e.g. 0300 1234567" value={form.phone} onChange={e => setForm(f => ({...f, phone: e.target.value}))} />
+
+              <label>Delivery Address <span>*</span></label>
+              <textarea required rows={2} placeholder="House no., Street, Area, City" value={form.address} onChange={e => setForm(f => ({...f, address: e.target.value}))} />
+
+              <label style={{marginTop: 14}}>Payment Method <span>*</span></label>
+              <div className="payment-options">
+                <label className={`pay-option${payment === 'cod' ? ' selected' : ''}`} onClick={() => setPayment('cod')}>
+                  <input type="radio" name="payment" value="cod" checked={payment === 'cod'} onChange={() => setPayment('cod')} />
+                  <div className="pay-icon">{COD_ICON}</div>
+                  <div>
+                    <strong>Cash on Delivery</strong>
+                    <span>Pay when your order arrives</span>
+                  </div>
+                  {payment === 'cod' && <span className="pay-check">{CHECK_ICON}</span>}
+                </label>
+                <label className={`pay-option${payment === 'online' ? ' selected' : ''}`} onClick={() => setPayment('online')}>
+                  <input type="radio" name="payment" value="online" checked={payment === 'online'} onChange={() => setPayment('online')} />
+                  <div className="pay-icon">{BANK_ICON}</div>
+                  <div>
+                    <strong>Online Payment</strong>
+                    <span>Bank transfer / EasyPaisa / JazzCash</span>
+                  </div>
+                  {payment === 'online' && <span className="pay-check">{CHECK_ICON}</span>}
+                </label>
+              </div>
+
+              {payment === 'online' && (
+                <div className="online-pay-note">
+                  <p>After placing your order, our team will share bank account details via WhatsApp for payment confirmation.</p>
+                </div>
+              )}
+
+              <button type="submit" className="button button-dark order-submit">
+                {WA_ICON}
+                Confirm Order on WhatsApp
+              </button>
+              <p className="order-disclaimer">By placing this order you agree to be contacted on WhatsApp for confirmation.</p>
+            </form>
           </div>
+        ) : (
+          <>
+            <div className="cart-items">
+              {cart.length === 0
+                ? <div className="empty-cart">
+                    <BrandMark />
+                    <h3>Your bag is empty</h3>
+                    <p>Add something thoughtful from our collection.</p>
+                    <a className="button button-dark" href="#shop" onClick={onClose}>Shop the collection</a>
+                  </div>
+                : cart.map((item, i) => (
+                    <div className="cart-item" key={i}>
+                      <img src={item.img} alt={item.name} />
+                      <div>
+                        <h3>{item.name}</h3>
+                        <p>{item.detail} · {item.size}</p>
+                        <strong>PKR {item.price.toLocaleString()}</strong>
+                      </div>
+                      <button className="remove-btn" onClick={() => onRemove(i)} aria-label="Remove">&#215;</button>
+                    </div>
+                  ))
+              }
+            </div>
+            {cart.length > 0 && (
+              <div className="cart-foot">
+                <div><span>Subtotal</span><strong>PKR {total.toLocaleString()}</strong></div>
+                <a
+                  className="button button-dark wa-checkout"
+                  href={`https://wa.me/${WA_NUMBER}?text=${buildWhatsAppMsg(cart)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {WA_ICON}
+                  Order on WhatsApp
+                </a>
+                <small>We'll confirm your order via WhatsApp</small>
+              </div>
+            )}
+          </>
         )}
       </aside>
     </>
@@ -530,7 +547,7 @@ export default function App() {
   const [cart, setCart] = useState([])
   const [cartOpen, setCartOpen] = useState(false)
   const [modalIdx, setModalIdx] = useState(null)
-  const [orderIdx, setOrderIdx] = useState(null)
+  const [selectedProduct, setSelectedProduct] = useState(null)
   const [policyPage, setPolicyPage] = useState(null)
 
   const addToCart = useCallback((idx) => {
@@ -574,7 +591,7 @@ export default function App() {
             <p>Presented for everyday enjoyment, generous sharing, and thoughtful gifting.</p>
           </div>
           <div className="product-grid">
-            {PRODUCTS.map((p, i) => <ProductCard key={p.name} product={p} index={i} onView={setModalIdx} onOrder={setOrderIdx} />)}
+            {PRODUCTS.map((p, i) => <ProductCard key={p.name} product={p} index={i} onView={setModalIdx} onOrder={idx => { setSelectedProduct(PRODUCTS[idx]); setCartOpen(true) }} />)}
           </div>
         </section>
 
@@ -776,9 +793,8 @@ export default function App() {
         </div>
       </footer>
 
-      {cartOpen && <CartDrawer cart={cart} onClose={() => setCartOpen(false)} onRemove={removeFromCart} />}
-      {modalIdx !== null && <ProductModal product={PRODUCTS[modalIdx]} index={modalIdx} onOrder={setOrderIdx} onClose={() => setModalIdx(null)} />}
-      {orderIdx !== null && <OrderModal product={PRODUCTS[orderIdx]} onClose={() => setOrderIdx(null)} />}
+      {cartOpen && <CartDrawer cart={cart} onClose={() => { setCartOpen(false); setSelectedProduct(null) }} onRemove={removeFromCart} selectedProduct={selectedProduct} onOrderClose={() => setSelectedProduct(null)} />}
+      {modalIdx !== null && <ProductModal product={PRODUCTS[modalIdx]} index={modalIdx} onOrder={idx => { setSelectedProduct(PRODUCTS[idx]); setCartOpen(true); setModalIdx(null) }} onClose={() => setModalIdx(null)} />}
       {policyPage && <PolicyModal type={policyPage} onClose={() => setPolicyPage(null)} />}
     </div>
   )

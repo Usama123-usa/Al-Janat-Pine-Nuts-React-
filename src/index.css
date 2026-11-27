@@ -310,6 +310,15 @@ footer { padding: 75px max(7.2vw, 16px) 28px; color: #d9d6cd; background: var(--
 .cart-foot > div { display: flex; justify-content: space-between; margin-bottom: 18px; font-family: var(--font-display); font-size: 19px; }
 .cart-foot .button { width: 100%; }
 .cart-foot small { display: block; margin-top: 12px; text-align: center; color: var(--muted); font-size: 8px; }
+.cart-back-btn { font-size: 20px !important; margin-right: 8px; opacity: .7; }
+.cart-back-btn:hover { opacity: 1; }
+.cart-order-form { flex: 1; overflow-y: auto; padding-bottom: 24px; }
+.cart-order-product { display: flex; gap: 14px; align-items: flex-start; padding: 18px 0 16px; border-bottom: 1px solid var(--line); margin-bottom: 4px; }
+.cart-order-product img { width: 72px; height: 72px; object-fit: cover; border-radius: 8px; flex-shrink: 0; }
+.cart-order-product h3 { margin: 0 0 2px; font-size: 15px; color: var(--forest); }
+.cart-order-product p { margin: 0 0 4px; font-size: 11px; color: var(--muted); letter-spacing: .04em; }
+.pay-icon { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 8px; background: rgba(21,52,43,.06); color: var(--forest); flex-shrink: 0; }
+.pay-check { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); color: var(--forest); display: flex; align-items: center; }
 
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
 .reveal { animation: fadeUp .9s ease both; }
