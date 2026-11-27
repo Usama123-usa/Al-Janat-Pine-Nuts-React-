@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react'
-import heroImg from '../public/images/chilgoza-hero.png'
+import heroImg from '../public/images/hero-new.webp'
 import flatlayImg from '../public/images/chilgoza-flatlay.png'
 import lifestyleImg from '../public/images/chilgoza-lifestyle.png'
 
