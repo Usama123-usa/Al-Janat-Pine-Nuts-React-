@@ -278,6 +278,25 @@ footer { padding: 75px max(7.2vw, 16px) 28px; color: #d9d6cd; background: var(--
   .cart-drawer { padding: 0 22px; }
 }
 
+/* Price with discount */
+.price-block { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 4px; }
+.price-original { font-size: 12px; color: var(--muted); text-decoration: line-through; }
+.price-off {
+  font-size: 10px; font-weight: 700; letter-spacing: .06em;
+  background: #e63946; color: #fff;
+  padding: 2px 7px; border-radius: 20px;
+}
+.price-block .price { margin: 0; width: 100%; }
+
+.modal-price-block { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.modal-price-original { font-size: 15px; color: var(--muted); text-decoration: line-through; }
+.modal-price-off {
+  font-size: 11px; font-weight: 700; letter-spacing: .06em;
+  background: #e63946; color: #fff;
+  padding: 3px 10px; border-radius: 20px;
+}
+.modal-price-block .modal-price { margin: 0; width: 100%; }
+
 /* View Details button on product card */
 .view-btn {
   width: 100%;

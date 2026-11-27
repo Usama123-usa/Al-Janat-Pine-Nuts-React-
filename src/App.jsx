@@ -13,6 +13,7 @@ const PRODUCTS = [
     detail: 'Shell-on pine nuts',
     size: '500g',
     price: 6000,
+    originalPrice: 8000,
     img: bag500gImg,
     imgs: [bag500gImg, nutsBowlImg],
     position: 'center 20%',
@@ -27,6 +28,7 @@ const PRODUCTS = [
     detail: 'Shell-on pine nuts',
     size: '1kg',
     price: 10000,
+    originalPrice: 13500,
     img: bag1kgImg,
     imgs: [bag1kgImg, storyImg],
     position: 'center 20%',
@@ -40,6 +42,7 @@ const PRODUCTS = [
     detail: 'Premium gift presentation',
     size: '2kg',
     price: 20000,
+    originalPrice: 27000,
     img: giftBoxImg,
     imgs: [giftBoxImg, editorialImg],
     position: 'center',
@@ -102,7 +105,7 @@ function Hero() {
         <p className="hero-copy">Authentic Chilgoza pine nuts, selected for their distinctive character and presented with quiet elegance.</p>
         <a className="button button-light" href="#shop">Discover the harvest <span>&#x2197;</span></a>
       </div>
-      <div className="hero-note"><span>01</span><p>Afghanistan<br />&amp; Pakistan</p></div>
+      <div className="hero-note"><span>01</span><p>Pakistan</p></div>
       <a className="scroll-cue" href="#shop">Scroll to discover <span>&#x2193;</span></a>
     </section>
   )
@@ -121,7 +124,11 @@ function ProductCard({ product, index, onAdd, onView }) {
           <h3 onClick={() => onView(index)} style={{ cursor: 'pointer' }}>{product.name}</h3>
           <p>{product.detail} · {product.size}</p>
         </div>
-        <p className="price">PKR {product.price.toLocaleString()}</p>
+        <div className="price-block">
+          <span className="price-original">PKR {product.originalPrice.toLocaleString()}</span>
+          <span className="price-off">25% OFF</span>
+          <p className="price">PKR {product.price.toLocaleString()}</p>
+        </div>
       </div>
       <button className="view-btn" onClick={() => onView(index)}>View Details</button>
     </article>
@@ -154,7 +161,11 @@ function ProductModal({ product, index, onAdd, onClose }) {
             <h2>{product.name}</h2>
             <p className="modal-detail">{product.detail} · {product.weight}</p>
             <p className="modal-origin">Origin: {product.origin}</p>
-            <p className="modal-price">PKR {product.price.toLocaleString()}</p>
+            <div className="modal-price-block">
+              <span className="modal-price-original">PKR {product.originalPrice.toLocaleString()}</span>
+              <span className="modal-price-off">25% OFF</span>
+              <p className="modal-price">PKR {product.price.toLocaleString()}</p>
+            </div>
             <p className="modal-desc">{product.description}</p>
             <ul className="modal-features">
               {product.features.map(f => <li key={f}><span>&#10003;</span> {f}</li>)}
