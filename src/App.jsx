@@ -515,7 +515,7 @@ export default function App() {
             <p>Premium Chilgoza, thoughtfully presented for modern tables.</p>
           </div>
           <div className="footer-links"><h3>Explore</h3><a href="#shop">Shop all</a><a href="#story">Our story</a><a href="#quality">Our standard</a><a href="#faq">FAQs</a></div>
-          <div className="footer-links"><h3>Help</h3><a href="mailto:hello@aljanat.com">hello@aljanat.com</a><a href="#shipping" onClick={e=>{e.preventDefault();setPolicyPage('shipping')}}>Shipping &amp; Delivery</a><a href="#returns" onClick={e=>{e.preventDefault();setPolicyPage('returns')}}>Returns &amp; Refunds</a><a href="#faq">Care Guide</a></div>
+          <div className="footer-links"><h3>Help</h3><a href="#shipping" onClick={e=>{e.preventDefault();setPolicyPage('shipping')}}>Shipping &amp; Delivery</a><a href="#returns" onClick={e=>{e.preventDefault();setPolicyPage('returns')}}>Returns &amp; Refunds</a><a href="#faq">Care Guide</a></div>
         </div>
         <div className="footer-bottom">
           <span>© 2026 Al Janat Pine Nuts</span>
