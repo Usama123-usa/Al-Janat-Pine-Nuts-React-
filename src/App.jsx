@@ -106,8 +106,10 @@ function Hero() {
         <a className="button button-light" href="#shop">Discover the harvest <span>&#x2197;</span></a>
       </div>
       <div className="hero-note"><span>01</span><p>Pakistan</p></div>
-      <a className="scroll-cue" href="#shop">Scroll to discover <span>&#x2193;</span></a>
     </section>
+    <div className="scroll-cue-wrap">
+      <a className="scroll-cue scroll-cue-below" href="#shop">Scroll to discover <span>&#x2193;</span></a>
+    </div>
   )
 }
 
