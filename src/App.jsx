@@ -506,7 +506,6 @@ export default function App() {
           </div>
         </section>
 
-        <Newsletter />
       </main>
 
       <footer>
