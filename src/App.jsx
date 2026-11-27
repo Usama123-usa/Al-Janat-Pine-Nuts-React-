@@ -5,11 +5,49 @@ import editorialImg from '../public/images/editorial-section.webp'
 import bag1kgImg from '../public/images/bag-1kg.webp'
 import bag500gImg from '../public/images/bag-500g.webp'
 import giftBoxImg from '../public/images/gift-box.webp'
+import nutsBowlImg from '../public/images/nuts-bowl.webp'
 
 const PRODUCTS = [
-  { name: 'Classic Chilgoza', detail: 'Shell-on pine nuts', size: '500g', price: 32, img: bag500gImg,  position: 'center 20%', badge: 'House favourite' },
-  { name: 'The Sharing Tin',  detail: 'Shell-on pine nuts', size: '1kg',  price: 58, img: bag1kgImg,   position: 'center 20%' },
-  { name: 'Al Janat Gift Box', detail: 'A considered presentation', size: '2kg', price: 98, img: giftBoxImg, position: 'center' },
+  {
+    name: 'Classic Chilgoza',
+    detail: 'Shell-on pine nuts',
+    size: '500g',
+    price: 6000,
+    img: bag500gImg,
+    imgs: [bag500gImg, nutsBowlImg],
+    position: 'center 20%',
+    badge: 'House favourite',
+    description: 'Our Classic Chilgoza is a celebration of the pine nut in its most honest form — shell-on, as nature intended. Sourced from the ancient mountain groves of Afghanistan and Pakistan, each nut is hand-selected for its distinctive slender shape and rich, buttery flavour. The gentle ritual of cracking the shell is part of the experience: slow down, gather close, and savour one of the rarest harvests on earth.',
+    features: ['100% Natural & Unprocessed', 'Hand-selected from mountain groves', 'Shell-on for traditional enjoyment', 'Rich in protein, healthy fats & magnesium', 'No additives or preservatives'],
+    origin: 'Afghanistan & Pakistan',
+    weight: '500g Net Weight',
+  },
+  {
+    name: 'The Sharing Tin',
+    detail: 'Shell-on pine nuts',
+    size: '1kg',
+    price: 10000,
+    img: bag1kgImg,
+    imgs: [bag1kgImg, storyImg],
+    position: 'center 20%',
+    description: 'Designed for generous tables and unhurried evenings, The Sharing Tin brings a full kilogram of our finest Chilgoza in a presentation worthy of the occasion. Whether passed between friends after dinner or offered as a considered gift, this is the format for those who know that good things deserve to be shared without restraint. Same exceptional quality — simply more of it.',
+    features: ['1kg Premium Chilgoza', 'Ideal for gatherings & gifting', 'Hand-selected grade A nuts', 'Shell-on, traditionally presented', 'Protective resealable packaging'],
+    origin: 'Afghanistan & Pakistan',
+    weight: '1kg Net Weight',
+  },
+  {
+    name: 'Al Janat Gift Box',
+    detail: 'Premium gift presentation',
+    size: '2kg',
+    price: 20000,
+    img: giftBoxImg,
+    imgs: [giftBoxImg, editorialImg],
+    position: 'center',
+    description: 'The Al Janat Gift Box is our most considered offering — two full kilograms of premium Chilgoza presented in an elegantly crafted gift tin housed within a signature forest-green box, finished with a hand-tied satin ribbon. Created for Eid, weddings, corporate occasions, and any moment that deserves a truly memorable gesture. A gift that speaks of taste, thoughtfulness, and an appreciation for the rare and the natural.',
+    features: ['2kg Premium Grade Chilgoza', 'Signature gift tin & forest-green box', 'Hand-tied satin ribbon included', 'Personalised gift note at checkout', 'Perfect for Eid, weddings & corporates'],
+    origin: 'Afghanistan & Pakistan',
+    weight: '2kg Net Weight',
+  },
 ]
 
 function BrandMark({ className = '' }) {
@@ -70,22 +108,64 @@ function Hero() {
   )
 }
 
-function ProductCard({ product, index, onAdd }) {
+function ProductCard({ product, index, onAdd, onView }) {
   return (
     <article className="product-card">
-      <div className="product-image">
+      <div className="product-image" onClick={() => onView(index)} style={{ cursor: 'pointer' }}>
         <img src={product.img} alt={product.name} style={{ objectPosition: product.position }} />
         {product.badge && <span className="product-label">{product.badge}</span>}
-        <button className="add-btn" onClick={() => onAdd(index)} aria-label={`Add ${product.name} to bag`}>+</button>
+        <button className="add-btn" onClick={e => { e.stopPropagation(); onAdd(index) }} aria-label={`Add ${product.name} to bag`}>+</button>
       </div>
       <div className="product-meta">
         <div>
-          <h3>{product.name}</h3>
+          <h3 onClick={() => onView(index)} style={{ cursor: 'pointer' }}>{product.name}</h3>
           <p>{product.detail} · {product.size}</p>
         </div>
-        <p className="price">${product.price}</p>
+        <p className="price">PKR {product.price.toLocaleString()}</p>
       </div>
+      <button className="view-btn" onClick={() => onView(index)}>View Details</button>
     </article>
+  )
+}
+
+function ProductModal({ product, index, onAdd, onClose }) {
+  const [activeImg, setActiveImg] = useState(0)
+  if (!product) return null
+  return (
+    <>
+      <div className="modal-overlay" onClick={onClose} />
+      <div className="product-modal" role="dialog" aria-modal="true" aria-label={product.name}>
+        <button className="modal-close" onClick={onClose} aria-label="Close">&#215;</button>
+        <div className="modal-inner">
+          <div className="modal-gallery">
+            <div className="modal-main-img">
+              <img src={product.imgs[activeImg]} alt={product.name} />
+            </div>
+            <div className="modal-thumbs">
+              {product.imgs.map((img, i) => (
+                <button key={i} className={`thumb-btn${activeImg === i ? ' active' : ''}`} onClick={() => setActiveImg(i)}>
+                  <img src={img} alt={`${product.name} view ${i + 1}`} />
+                </button>
+              ))}
+            </div>
+          </div>
+          <div className="modal-info">
+            {product.badge && <span className="modal-badge">{product.badge}</span>}
+            <h2>{product.name}</h2>
+            <p className="modal-detail">{product.detail} · {product.weight}</p>
+            <p className="modal-origin">Origin: {product.origin}</p>
+            <p className="modal-price">PKR {product.price.toLocaleString()}</p>
+            <p className="modal-desc">{product.description}</p>
+            <ul className="modal-features">
+              {product.features.map(f => <li key={f}><span>&#10003;</span> {f}</li>)}
+            </ul>
+            <button className="button button-dark modal-add" onClick={() => { onAdd(index); onClose() }}>
+              Add to Bag <span>&#x2192;</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </>
   )
 }
 
@@ -149,7 +229,7 @@ function CartDrawer({ cart, onClose, onRemove }) {
                   <div>
                     <h3>{item.name}</h3>
                     <p>{item.detail} · {item.size}</p>
-                    <strong>${item.price}</strong>
+                    <strong>PKR {item.price.toLocaleString()}</strong>
                   </div>
                   <button className="remove-btn" onClick={() => onRemove(i)} aria-label="Remove">&#215;</button>
                 </div>
@@ -158,7 +238,7 @@ function CartDrawer({ cart, onClose, onRemove }) {
         </div>
         {cart.length > 0 && (
           <div className="cart-foot">
-            <div><span>Subtotal</span><strong>${total}</strong></div>
+            <div><span>Subtotal</span><strong>PKR {total.toLocaleString()}</strong></div>
             <button className="button button-dark">Continue to checkout</button>
             <small>Taxes and shipping calculated at checkout</small>
           </div>
@@ -171,6 +251,7 @@ function CartDrawer({ cart, onClose, onRemove }) {
 export default function App() {
   const [cart, setCart] = useState([])
   const [cartOpen, setCartOpen] = useState(false)
+  const [modalIdx, setModalIdx] = useState(null)
 
   const addToCart = useCallback((idx) => {
     const p = PRODUCTS[idx]
@@ -214,7 +295,7 @@ export default function App() {
             <p>Presented for everyday enjoyment, generous sharing, and thoughtful gifting.</p>
           </div>
           <div className="product-grid">
-            {PRODUCTS.map((p, i) => <ProductCard key={p.name} product={p} index={i} onAdd={addToCart} />)}
+            {PRODUCTS.map((p, i) => <ProductCard key={p.name} product={p} index={i} onAdd={addToCart} onView={setModalIdx} />)}
           </div>
         </section>
 
@@ -306,6 +387,7 @@ export default function App() {
       </footer>
 
       {cartOpen && <CartDrawer cart={cart} onClose={() => setCartOpen(false)} onRemove={removeFromCart} />}
+      {modalIdx !== null && <ProductModal product={PRODUCTS[modalIdx]} index={modalIdx} onAdd={addToCart} onClose={() => setModalIdx(null)} />}
     </div>
   )
 }
