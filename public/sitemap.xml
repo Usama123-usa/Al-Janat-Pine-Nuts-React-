@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <url>
+    <loc>https://aljanat.vercel.app/</loc>
+    <lastmod>2026-11-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://aljanat.vercel.app/images/hero-new.webp</image:loc>
+      <image:title>Al Janat Pine Nuts - Premium Chilgoza from Pakistan</image:title>
+      <image:caption>Hand-selected Chilgoza pine nuts from the mountain groves of Pakistan</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://aljanat.vercel.app/images/bag-500g.webp</image:loc>
+      <image:title>Classic Chilgoza 500g - Al Janat Pine Nuts</image:title>
+      <image:caption>Classic Chilgoza pine nuts 500g shell-on pack</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://aljanat.vercel.app/images/bag-1kg.webp</image:loc>
+      <image:title>The Sharing Tin 1kg - Al Janat Pine Nuts</image:title>
+      <image:caption>Premium Chilgoza pine nuts 1kg sharing tin</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://aljanat.vercel.app/images/gift-box.webp</image:loc>
+      <image:title>Al Janat Gift Box 2kg - Premium Chilgoza Gift</image:title>
+      <image:caption>Al Janat premium Chilgoza gift box 2kg for Eid and corporate gifting</image:caption>
+    </image:image>
+  </url>
+
+</urlset>
