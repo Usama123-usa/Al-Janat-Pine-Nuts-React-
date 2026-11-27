@@ -113,10 +113,19 @@ h1 em, h2 em { color: var(--gold); font-style: italic; }
   padding: 22px 0 10px;
   background: var(--ivory);
 }
+@keyframes scroll-fade-in {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 0.75; transform: translateY(0); }
+}
+@keyframes bounce-arrow {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(5px); }
+}
 .scroll-cue-below {
   font-size: 11px;
   letter-spacing: .18em;
   color: var(--forest);
+  animation: scroll-fade-in 0.8s ease 0.4s both;
   display: flex;
   align-items: center;
   gap: 4px;
@@ -124,7 +133,7 @@ h1 em, h2 em { color: var(--gold); font-style: italic; }
   transition: opacity .2s;
 }
 .scroll-cue-below:hover { opacity: 1; }
-.scroll-cue-below span { color: var(--gold); font-size: 14px; margin-left: 8px; }
+.scroll-cue-below span { color: var(--gold); font-size: 14px; margin-left: 8px; display: inline-block; animation: bounce-arrow 1.4s ease-in-out 1.2s infinite; }
 
 /* Sections */
 .section-pad { padding-block: 128px; padding-inline: max(7.2vw, 16px); }
