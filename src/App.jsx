@@ -96,20 +96,22 @@ function Header({ cartCount, onCartOpen }) {
 
 function Hero() {
   return (
-    <section className="hero">
-      <img src={heroImg} alt="Chilgoza pine nuts presented with forest green packaging" />
-      <div className="hero-shade" />
-      <div className="hero-content reveal">
-        <p className="eyebrow light">From the mountain groves</p>
-        <h1>Nature&#8217;s rarest<br /><em>harvest.</em></h1>
-        <p className="hero-copy">Authentic Chilgoza pine nuts, selected for their distinctive character and presented with quiet elegance.</p>
-        <a className="button button-light" href="#shop">Discover the harvest <span>&#x2197;</span></a>
+    <>
+      <section className="hero">
+        <img src={heroImg} alt="Chilgoza pine nuts presented with forest green packaging" />
+        <div className="hero-shade" />
+        <div className="hero-content reveal">
+          <p className="eyebrow light">From the mountain groves</p>
+          <h1>Nature&#8217;s rarest<br /><em>harvest.</em></h1>
+          <p className="hero-copy">Authentic Chilgoza pine nuts, selected for their distinctive character and presented with quiet elegance.</p>
+          <a className="button button-light" href="#shop">Discover the harvest <span>&#x2197;</span></a>
+        </div>
+        <div className="hero-note"><span>01</span><p>Pakistan</p></div>
+      </section>
+      <div className="scroll-cue-wrap">
+        <a className="scroll-cue scroll-cue-below" href="#shop">Scroll to discover <span>&#x2193;</span></a>
       </div>
-      <div className="hero-note"><span>01</span><p>Pakistan</p></div>
-    </section>
-    <div className="scroll-cue-wrap">
-      <a className="scroll-cue scroll-cue-below" href="#shop">Scroll to discover <span>&#x2193;</span></a>
-    </div>
+    </>
   )
 }
 
