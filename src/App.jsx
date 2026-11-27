@@ -511,6 +511,69 @@ export default function App() {
           </div>
         </section>
 
+        <section className="shipping-section section-pad">
+          <div className="section-heading centered">
+            <p className="eyebrow">Delivery &amp; Service</p>
+            <h2>We deliver with <em>care.</em></h2>
+          </div>
+          <div className="shipping-grid">
+            <div className="shipping-card">
+              <div className="shipping-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M1 3h15v13H1z"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
+                </svg>
+              </div>
+              <h3>Nationwide Delivery</h3>
+              <p>We deliver across all major cities in Pakistan — Karachi, Lahore, Islamabad and beyond.</p>
+            </div>
+            <div className="shipping-card">
+              <div className="shipping-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
+                </svg>
+              </div>
+              <h3>Free Delivery</h3>
+              <p>Enjoy free delivery on all orders above PKR 10,000. No hidden charges, no surprises.</p>
+            </div>
+            <div className="shipping-card">
+              <div className="shipping-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+                </svg>
+              </div>
+              <h3>2–5 Business Days</h3>
+              <p>Orders are carefully packed and dispatched within 24 hours. Tracking number sent via SMS.</p>
+            </div>
+            <div className="shipping-card">
+              <div className="shipping-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/>
+                </svg>
+              </div>
+              <h3>Secure Packaging</h3>
+              <p>Every order is packed with care to protect the product and preserve freshness.</p>
+            </div>
+            <div className="shipping-card">
+              <div className="shipping-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.51"/>
+                </svg>
+              </div>
+              <h3>7-Day Returns</h3>
+              <p>Not happy? Return unopened items within 7 days for a full refund or replacement.</p>
+            </div>
+            <div className="shipping-card">
+              <div className="shipping-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                </svg>
+              </div>
+              <h3>24/7 Support</h3>
+              <p>Have a question? Our team is always ready to help you via WhatsApp or email.</p>
+            </div>
+          </div>
+        </section>
+
       </main>
 
       <footer>
