@@ -114,13 +114,31 @@ h1 em, h2 em { color: var(--gold); font-style: italic; }
   background: var(--ivory);
 }
 @keyframes scroll-fade-in {
-  from { opacity: 0; transform: translateY(-8px); }
-  to   { opacity: 0.75; transform: translateY(0); }
+  from { opacity: 0; transform: translateX(-50%) translateY(8px); }
+  to   { opacity: 0.85; transform: translateX(-50%) translateY(0); }
 }
 @keyframes bounce-arrow {
   0%, 100% { transform: translateY(0); }
   50%       { transform: translateY(5px); }
 }
+.scroll-cue-hero {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  font-size: 12px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.85);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  animation: scroll-fade-in 0.8s ease 0.6s both;
+  white-space: nowrap;
+}
+.scroll-cue-hero span { color: var(--gold); font-size: 16px; display: inline-block; animation: bounce-arrow 1.4s ease-in-out 1.4s infinite; }
 .scroll-cue-below {
   font-size: 11px;
   letter-spacing: .18em;
