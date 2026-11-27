@@ -111,13 +111,13 @@ function Hero() {
   )
 }
 
-function ProductCard({ product, index, onAdd, onView }) {
+function ProductCard({ product, index, onView, onOrder }) {
   return (
     <article className="product-card">
       <div className="product-image" onClick={() => onView(index)} style={{ cursor: 'pointer' }}>
         <img src={product.img} alt={product.name} style={{ objectPosition: product.position }} loading="lazy" />
         {product.badge && <span className="product-label">{product.badge}</span>}
-        <button className="add-btn" onClick={e => { e.stopPropagation(); onAdd(index) }} aria-label={`Add ${product.name} to bag`}>+</button>
+        <button className="add-btn" onClick={e => { e.stopPropagation(); onOrder(index) }} aria-label={`Order ${product.name}`}>+</button>
       </div>
       <div className="product-meta">
         <div>
@@ -130,12 +130,12 @@ function ProductCard({ product, index, onAdd, onView }) {
           <p className="price">PKR {product.price.toLocaleString()}</p>
         </div>
       </div>
-      <button className="view-btn" onClick={() => onView(index)}>View Details</button>
+      <button className="view-btn" onClick={() => onOrder(index)}>Shop Now</button>
     </article>
   )
 }
 
-function ProductModal({ product, index, onAdd, onClose }) {
+function ProductModal({ product, index, onOrder, onClose }) {
   const [activeImg, setActiveImg] = useState(0)
   if (!product) return null
   return (
@@ -170,11 +170,78 @@ function ProductModal({ product, index, onAdd, onClose }) {
             <ul className="modal-features">
               {product.features.map(f => <li key={f}><span>&#10003;</span> {f}</li>)}
             </ul>
-            <button className="button button-dark modal-add" onClick={() => { onAdd(index); onClose() }}>
-              Add to Bag <span>&#x2192;</span>
+            <button className="button button-dark modal-add" onClick={() => { onOrder(index); onClose() }}>
+              Shop Now <span>&#x2192;</span>
             </button>
           </div>
         </div>
+      </div>
+    </>
+  )
+}
+
+function OrderModal({ product, onClose }) {
+  const [form, setForm] = useState({ name: '', phone: '', address: '' })
+  const [qty, setQty] = useState(1)
+  if (!product) return null
+
+  const total = product.price * qty
+
+  function handleSubmit(e) {
+    e.preventDefault()
+    const msg = encodeURIComponent(
+      `Assalam o Alaikum! I'd like to place an order:\n\n` +
+      `Product: ${product.name} (${product.size})\n` +
+      `Quantity: ${qty}\n` +
+      `Price: PKR ${product.price.toLocaleString()} × ${qty} = PKR ${total.toLocaleString()}\n\n` +
+      `Customer Details:\n` +
+      `Name: ${form.name}\n` +
+      `Phone: ${form.phone}\n` +
+      `Address: ${form.address}\n\n` +
+      `Please confirm my order. Thank you!`
+    )
+    window.open(`https://wa.me/${WA_NUMBER}?text=${msg}`, '_blank', 'noopener,noreferrer')
+    onClose()
+  }
+
+  return (
+    <>
+      <div className="modal-overlay" onClick={onClose} />
+      <div className="order-modal" role="dialog" aria-modal="true">
+        <button className="modal-close" onClick={onClose} aria-label="Close">&#215;</button>
+        <div className="order-modal-head">
+          <img src={product.img} alt={product.name} />
+          <div>
+            <h3>{product.name}</h3>
+            <p>{product.detail} · {product.size}</p>
+            <div className="modal-price-block" style={{marginTop: 6}}>
+              <span className="modal-price-original">PKR {product.originalPrice.toLocaleString()}</span>
+              <span className="modal-price-off">25% OFF</span>
+              <p className="modal-price">PKR {product.price.toLocaleString()}</p>
+            </div>
+          </div>
+        </div>
+        <form className="order-form" onSubmit={handleSubmit}>
+          <div className="order-qty-row">
+            <label>Quantity</label>
+            <div className="qty-ctrl">
+              <button type="button" onClick={() => setQty(q => Math.max(1, q - 1))}>−</button>
+              <span>{qty}</span>
+              <button type="button" onClick={() => setQty(q => q + 1)}>+</button>
+            </div>
+            <span className="order-total">Total: <strong>PKR {total.toLocaleString()}</strong></span>
+          </div>
+          <label>Full Name <span>*</span></label>
+          <input required placeholder="e.g. Ali Hassan" value={form.name} onChange={e => setForm(f => ({...f, name: e.target.value}))} />
+          <label>Phone Number <span>*</span></label>
+          <input required type="tel" placeholder="e.g. 0300 1234567" value={form.phone} onChange={e => setForm(f => ({...f, phone: e.target.value}))} />
+          <label>Delivery Address <span>*</span></label>
+          <textarea required rows={3} placeholder="House no., Street, City" value={form.address} onChange={e => setForm(f => ({...f, address: e.target.value}))} />
+          <button type="submit" className="button button-dark order-submit">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="17" height="17"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.533 5.857L.057 23.882a.5.5 0 0 0 .613.613l6.056-1.481A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.797 9.797 0 0 1-5.001-1.372l-.359-.214-3.724.91.937-3.619-.234-.372A9.797 9.797 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+            Complete Order on WhatsApp
+          </button>
+        </form>
       </div>
     </>
   )
@@ -414,6 +481,7 @@ export default function App() {
   const [cart, setCart] = useState([])
   const [cartOpen, setCartOpen] = useState(false)
   const [modalIdx, setModalIdx] = useState(null)
+  const [orderIdx, setOrderIdx] = useState(null)
   const [policyPage, setPolicyPage] = useState(null)
 
   const addToCart = useCallback((idx) => {
@@ -457,7 +525,7 @@ export default function App() {
             <p>Presented for everyday enjoyment, generous sharing, and thoughtful gifting.</p>
           </div>
           <div className="product-grid">
-            {PRODUCTS.map((p, i) => <ProductCard key={p.name} product={p} index={i} onAdd={addToCart} onView={setModalIdx} />)}
+            {PRODUCTS.map((p, i) => <ProductCard key={p.name} product={p} index={i} onView={setModalIdx} onOrder={setOrderIdx} />)}
           </div>
         </section>
 
@@ -660,7 +728,8 @@ export default function App() {
       </footer>
 
       {cartOpen && <CartDrawer cart={cart} onClose={() => setCartOpen(false)} onRemove={removeFromCart} />}
-      {modalIdx !== null && <ProductModal product={PRODUCTS[modalIdx]} index={modalIdx} onAdd={addToCart} onClose={() => setModalIdx(null)} />}
+      {modalIdx !== null && <ProductModal product={PRODUCTS[modalIdx]} index={modalIdx} onOrder={setOrderIdx} onClose={() => setModalIdx(null)} />}
+      {orderIdx !== null && <OrderModal product={PRODUCTS[orderIdx]} onClose={() => setOrderIdx(null)} />}
       {policyPage && <PolicyModal type={policyPage} onClose={() => setPolicyPage(null)} />}
     </div>
   )
