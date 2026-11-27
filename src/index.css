@@ -102,7 +102,7 @@ h1 em, h2 em { color: var(--gold); font-style: italic; }
 .button-light:hover { background: #fff; border-color: rgba(255,255,255,.7); }
 .button-dark { color: var(--ivory); background: var(--forest); }
 .button-dark:hover { background: #24523f; }
-.hero-note { position: absolute; right: 4.8vw; top: 50%; transform: translateY(-50%); z-index: 1; display: flex; align-items: center; gap: 12px; color: rgba(255,255,255,.8); }
+.hero-note { position: absolute; right: 4.8vw; bottom: 50px; z-index: 1; display: flex; align-items: center; gap: 16px; color: rgba(255,255,255,.8); }
 .hero-note span { color: #d7c59f; font-family: var(--font-display); font-size: 30px; line-height: 1; }
 .hero-note p { margin: 0; font-size: 9px; line-height: 1.6; letter-spacing: .14em; text-transform: uppercase; }
 .scroll-cue { position: absolute; z-index: 1; bottom: 38px; left: max(8.4vw, 16px); font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: #fff; }
