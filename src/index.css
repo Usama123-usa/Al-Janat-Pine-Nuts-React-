@@ -48,8 +48,14 @@ h1, h2, h3, h4 { margin: 0; }
   letter-spacing: .18em;
   text-transform: uppercase;
   flex-shrink: 0;
+  color: var(--forest);
 }
 .announcement-track span strong { color: var(--gold); font-weight: 700; }
+@keyframes blink-gold {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.15; }
+}
+.blink-offer { color: var(--forest) !important; font-weight: 700; animation: blink-gold 1.2s ease-in-out infinite; }
 @keyframes marquee {
   0%   { transform: translateX(0); }
   100% { transform: translateX(-50%); }
