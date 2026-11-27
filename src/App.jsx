@@ -97,7 +97,7 @@ function Header({ cartCount, onCartOpen }) {
 function Hero() {
   return (
     <section className="hero">
-      <img src={heroImg} alt="Chilgoza pine nuts presented with forest green packaging" />
+      <img src={heroImg} alt="Chilgoza pine nuts presented with forest green packaging" fetchpriority="high" />
       <div className="hero-shade" />
       <div className="hero-content reveal">
         <p className="eyebrow light">From the mountain groves</p>
@@ -115,7 +115,7 @@ function ProductCard({ product, index, onAdd, onView }) {
   return (
     <article className="product-card">
       <div className="product-image" onClick={() => onView(index)} style={{ cursor: 'pointer' }}>
-        <img src={product.img} alt={product.name} style={{ objectPosition: product.position }} />
+        <img src={product.img} alt={product.name} style={{ objectPosition: product.position }} loading="lazy" />
         {product.badge && <span className="product-label">{product.badge}</span>}
         <button className="add-btn" onClick={e => { e.stopPropagation(); onAdd(index) }} aria-label={`Add ${product.name} to bag`}>+</button>
       </div>
@@ -463,7 +463,7 @@ export default function App() {
 
         <section id="story" className="story">
           <div className="story-image">
-            <img src={storyImg} alt="Chilgoza pine nuts in a stoneware bowl" />
+            <img src={storyImg} alt="Chilgoza pine nuts in a stoneware bowl" loading="lazy" />
             <span className="image-caption">A harvest shaped by altitude and time</span>
           </div>
           <div className="story-copy">
@@ -508,7 +508,7 @@ export default function App() {
             <a href="#shop" className="button button-dark">Shop the collection <span>&#x2197;</span></a>
           </div>
           <div className="editorial-image">
-            <img src={editorialImg} alt="Pine nuts, kernels, pine branches on stone" />
+            <img src={editorialImg} alt="Pine nuts, kernels, pine branches on stone" loading="lazy" />
           </div>
         </section>
 
@@ -616,7 +616,7 @@ export default function App() {
               </div>
             </div>
             <div className="about-image">
-              <img src={storyImg} alt="Al Janat Pine Nuts — authentic chilgoza from Pakistan" />
+              <img src={storyImg} alt="Al Janat Pine Nuts — authentic chilgoza from Pakistan" loading="lazy" />
               <div className="about-badge">
                 <BrandMark />
                 <span>Est. 2024</span>
