@@ -215,6 +215,16 @@ function Newsletter() {
   )
 }
 
+const WA_NUMBER = '923484337792'
+
+function buildWhatsAppMsg(cart) {
+  const lines = cart.map(i => `• ${i.name} (${i.size}) x${i.qty} — PKR ${(i.price * i.qty).toLocaleString()}`)
+  const total = cart.reduce((a, i) => a + i.price * i.qty, 0)
+  return encodeURIComponent(
+    `Assalam o Alaikum! I'd like to place an order:\n\n${lines.join('\n')}\n\nTotal: PKR ${total.toLocaleString()}\n\nPlease confirm availability and delivery details. Thank you!`
+  )
+}
+
 function CartDrawer({ cart, onClose, onRemove }) {
   const total = cart.reduce((a, i) => a + i.price * i.qty, 0)
   const count = cart.reduce((a, i) => a + i.qty, 0)
@@ -250,8 +260,16 @@ function CartDrawer({ cart, onClose, onRemove }) {
         {cart.length > 0 && (
           <div className="cart-foot">
             <div><span>Subtotal</span><strong>PKR {total.toLocaleString()}</strong></div>
-            <button className="button button-dark">Continue to checkout</button>
-            <small>Taxes and shipping calculated at checkout</small>
+            <a
+              className="button button-dark wa-checkout"
+              href={`https://wa.me/${WA_NUMBER}?text=${buildWhatsAppMsg(cart)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor" width="17" height="17" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.533 5.857L.057 23.882a.5.5 0 0 0 .613.613l6.056-1.481A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.797 9.797 0 0 1-5.001-1.372l-.359-.214-3.724.91.937-3.619-.234-.372A9.797 9.797 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+              Order on WhatsApp
+            </a>
+            <small>We'll confirm your order via WhatsApp</small>
           </div>
         )}
       </aside>
@@ -614,6 +632,10 @@ export default function App() {
           <div className="footer-brand">
             <BrandMark />
             <p>Premium Chilgoza, thoughtfully presented for modern tables.</p>
+            <a className="footer-wa" href={`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent('Assalam o Alaikum! I\'d like to inquire about Al Janat Pine Nuts.')}`} target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.533 5.857L.057 23.882a.5.5 0 0 0 .613.613l6.056-1.481A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.797 9.797 0 0 1-5.001-1.372l-.359-.214-3.724.91.937-3.619-.234-.372A9.797 9.797 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+              Chat on WhatsApp
+            </a>
           </div>
           <div className="footer-links"><h3>Explore</h3><a href="#shop">Shop all</a><a href="#story">Our story</a><a href="#quality">Our standard</a><a href="#faq">FAQs</a></div>
           <div className="footer-links"><h3>Help</h3><span className="footer-shipping-note">🚚 Free delivery on orders above PKR 10,000 · Delivered in 2–5 business days</span><a href="#shipping" onClick={e=>{e.preventDefault();setPolicyPage('shipping')}}>Shipping &amp; Delivery</a><a href="#returns" onClick={e=>{e.preventDefault();setPolicyPage('returns')}}>Returns &amp; Refunds</a><a href="#faq">Care Guide</a></div>
