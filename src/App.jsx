@@ -18,9 +18,9 @@ const PRODUCTS = [
     imgs: [bag500gImg, nutsBowlImg],
     position: 'center 20%',
     badge: 'House favourite',
-    description: 'Our Classic Chilgoza is a celebration of the pine nut in its most honest form — shell-on, as nature intended. Sourced from the ancient mountain groves of Afghanistan and Pakistan, each nut is hand-selected for its distinctive slender shape and rich, buttery flavour. The gentle ritual of cracking the shell is part of the experience: slow down, gather close, and savour one of the rarest harvests on earth.',
+    description: 'Our Classic Chilgoza is a celebration of the pine nut in its most honest form — shell-on, as nature intended. Sourced from the ancient mountain groves of Pakistan, each nut is hand-selected for its distinctive slender shape and rich, buttery flavour. The gentle ritual of cracking the shell is part of the experience: slow down, gather close, and savour one of the rarest harvests on earth.',
     features: ['100% Natural & Unprocessed', 'Hand-selected from mountain groves', 'Shell-on for traditional enjoyment', 'Rich in protein, healthy fats & magnesium', 'No additives or preservatives'],
-    origin: 'Afghanistan & Pakistan',
+    origin: 'Pakistan',
     weight: '500g Net Weight',
   },
   {
@@ -34,7 +34,7 @@ const PRODUCTS = [
     position: 'center 20%',
     description: 'Designed for generous tables and unhurried evenings, The Sharing Tin brings a full kilogram of our finest Chilgoza in a presentation worthy of the occasion. Whether passed between friends after dinner or offered as a considered gift, this is the format for those who know that good things deserve to be shared without restraint. Same exceptional quality — simply more of it.',
     features: ['1kg Premium Chilgoza', 'Ideal for gatherings & gifting', 'Hand-selected grade A nuts', 'Shell-on, traditionally presented', 'Protective resealable packaging'],
-    origin: 'Afghanistan & Pakistan',
+    origin: 'Pakistan',
     weight: '1kg Net Weight',
   },
   {
@@ -48,7 +48,7 @@ const PRODUCTS = [
     position: 'center',
     description: 'The Al Janat Gift Box is our most considered offering — two full kilograms of premium Chilgoza presented in an elegantly crafted gift tin housed within a signature forest-green box, finished with a hand-tied satin ribbon. Created for Eid, weddings, corporate occasions, and any moment that deserves a truly memorable gesture. A gift that speaks of taste, thoughtfulness, and an appreciation for the rare and the natural.',
     features: ['2kg Premium Grade Chilgoza', 'Signature gift tin & forest-green box', 'Hand-tied satin ribbon included', 'Personalised gift note at checkout', 'Perfect for Eid, weddings & corporates'],
-    origin: 'Afghanistan & Pakistan',
+    origin: 'Pakistan',
     weight: '2kg Net Weight',
   },
 ]
@@ -415,7 +415,7 @@ export default function App() {
   const cartCount = cart.reduce((a, i) => a + i.qty, 0)
 
   const faqs = [
-    { num: '01', q: 'What is Chilgoza?', a: 'Chilgoza is a distinctive variety of pine nut native to the mountain regions of Afghanistan and Pakistan. It is traditionally enjoyed by gently cracking the slender shell to reveal the kernel inside.', open: true },
+    { num: '01', q: 'What is Chilgoza?', a: 'Chilgoza is a distinctive variety of pine nut native to the mountain regions of Pakistan. It is traditionally enjoyed by gently cracking the slender shell to reveal the kernel inside.', open: true },
     { num: '02', q: 'How should I store my pine nuts?', a: 'Keep them sealed in a cool, dry place away from direct sunlight. After opening, close the pack carefully to preserve their natural character.' },
     { num: '03', q: 'Are the pine nuts sold in their shells?', a: 'Yes. Our core Chilgoza selection is presented shell-on, honouring the traditional way these pine nuts are shared and enjoyed.' },
     { num: '04', q: 'Do you offer gifting options?', a: 'Our gift box is designed for thoughtful hosting and seasonal giving. Add a note at checkout and our team will include it with your order.' },
@@ -519,7 +519,7 @@ export default function App() {
         </div>
         <div className="footer-bottom">
           <span>© 2026 Al Janat Pine Nuts</span>
-          <span>Authentic Chilgoza · Afghanistan &amp; Pakistan</span>
+          <span>Authentic Chilgoza · Pakistan</span>
         </div>
       </footer>
 
