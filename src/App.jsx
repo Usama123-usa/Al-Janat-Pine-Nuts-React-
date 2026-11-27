@@ -4,12 +4,12 @@ import flatlayImg from '../public/images/chilgoza-flatlay.png'
 import lifestyleImg from '../public/images/chilgoza-lifestyle.png'
 import bag1kgImg from '../public/images/bag-1kg.webp'
 import bag500gImg from '../public/images/bag-500g.webp'
-import nutsBowlImg from '../public/images/nuts-bowl.webp'
+import giftBoxImg from '../public/images/gift-box.webp'
 
 const PRODUCTS = [
-  { name: 'Classic Chilgoza', detail: 'Shell-on pine nuts', size: '250g', price: 22, img: bag1kgImg,   position: 'center 20%', badge: 'House favourite' },
-  { name: 'The Sharing Tin',  detail: 'Shell-on pine nuts', size: '500g', price: 38, img: bag500gImg,  position: 'center 20%' },
-  { name: 'Al Janat Gift Box', detail: 'A considered presentation', size: '750g', price: 58, img: nutsBowlImg, position: 'center' },
+  { name: 'Classic Chilgoza', detail: 'Shell-on pine nuts', size: '500g', price: 32, img: bag500gImg,  position: 'center 20%', badge: 'House favourite' },
+  { name: 'The Sharing Tin',  detail: 'Shell-on pine nuts', size: '1kg',  price: 58, img: bag1kgImg,   position: 'center 20%' },
+  { name: 'Al Janat Gift Box', detail: 'A considered presentation', size: '2kg', price: 98, img: giftBoxImg, position: 'center' },
 ]
 
 function BrandMark({ className = '' }) {
