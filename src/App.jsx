@@ -275,9 +275,8 @@ const POLICIES = {
       {
         heading: 'Shipping Charges',
         items: [
-          { label: 'Orders above PKR 5,000', value: 'Free Delivery' },
-          { label: 'Orders below PKR 5,000', value: 'PKR 200 flat rate' },
-          { label: 'Same-day delivery (Karachi)', value: 'PKR 350 (order before 12pm)' },
+          { label: 'Orders above PKR 10,000', value: 'Free Delivery' },
+          { label: 'Orders below PKR 10,000', value: 'Standard shipping charges apply' },
         ],
       },
       {
@@ -428,12 +427,6 @@ export default function App() {
       <Header cartCount={cartCount} onCartOpen={() => setCartOpen(true)} />
       <main>
         <Hero />
-
-        <section className="intro section-pad">
-          <p className="eyebrow">A rare mountain delicacy</p>
-          <h2>Rich in tradition.<br /><em>Remarkable by nature.</em></h2>
-          <p className="intro-copy">Long treasured across the mountain regions of Afghanistan and Pakistan, Chilgoza is a pine nut unlike any other—distinctive in form, ritual, and flavour.</p>
-        </section>
 
         <section id="shop" className="shop section-pad">
           <div className="section-heading">
