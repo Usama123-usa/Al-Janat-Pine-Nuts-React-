@@ -75,7 +75,7 @@ function Header({ cartCount, onCartOpen }) {
         <a href="#shop" onClick={() => setMenuOpen(false)}>Shop</a>
         <a href="#story" onClick={() => setMenuOpen(false)}>Our Story</a>
         <a href="#quality" onClick={() => setMenuOpen(false)}>Our Standard</a>
-        <a href="#faq" onClick={() => setMenuOpen(false)}>Journal</a>
+        <a href="#about" onClick={() => setMenuOpen(false)}>About Us</a>
       </nav>
       <div className="header-actions">
         <button className="text-button search-button" aria-label="Search">
@@ -572,6 +572,39 @@ export default function App() {
               </div>
               <h3>24/7 Support</h3>
               <p>Have a question? Our team is always ready to help you via WhatsApp or email.</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="about" className="about-section section-pad">
+          <div className="about-inner">
+            <div className="about-text">
+              <p className="eyebrow">Who we are</p>
+              <h2>Born from a love of <em>the natural.</em></h2>
+              <p>Al Janat Pine Nuts was founded with a single purpose — to bring one of Pakistan's most treasured natural foods to tables that deserve it. We believe the finest things in life come from the land, chosen with care and presented with intention.</p>
+              <p>Our Chilgoza pine nuts are sourced directly from the mountain groves of Pakistan, where the conditions produce a nut unlike any other — slender, buttery, and rich in character. We work closely with trusted farmers and collectors to ensure every batch meets our standard before it reaches you.</p>
+              <p>At Al Janat, we don't believe in shortcuts. No artificial flavourings, no mass processing, no compromise. Just the pine nut — honest, natural, and presented exactly as it should be.</p>
+              <div className="about-stats">
+                <div className="about-stat">
+                  <strong>100%</strong>
+                  <span>Natural & Unprocessed</span>
+                </div>
+                <div className="about-stat">
+                  <strong>Direct</strong>
+                  <span>Farm to Table Sourcing</span>
+                </div>
+                <div className="about-stat">
+                  <strong>Pakistan</strong>
+                  <span>Mountain Grown Chilgoza</span>
+                </div>
+              </div>
+            </div>
+            <div className="about-image">
+              <img src={storyImg} alt="Al Janat Pine Nuts — authentic chilgoza from Pakistan" />
+              <div className="about-badge">
+                <BrandMark />
+                <span>Est. 2024</span>
+              </div>
             </div>
           </div>
         </section>
